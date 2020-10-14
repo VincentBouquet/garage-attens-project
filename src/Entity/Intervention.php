@@ -37,6 +37,16 @@ class Intervention
      */
     private $timeLength;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="interventions")
+     */
+    private $employee;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="interventions")
+     */
+    private $client;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +96,30 @@ class Intervention
     public function setTimeLength(int $timeLength): self
     {
         $this->timeLength = $timeLength;
+
+        return $this;
+    }
+
+    public function getEmployee(): ?User
+    {
+        return $this->employee;
+    }
+
+    public function setEmployee(?User $employee): self
+    {
+        $this->employee = $employee;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }
