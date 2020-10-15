@@ -100,4 +100,12 @@ class InterventionRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getTimeWorked() {
+        return $this->createQueryBuilder("intervention")
+            ->select("SUM(intervention.timeLength/60/151.67*100)")
+            ->groupBy("intervention.employee")
+            ->getQuery()
+            ->getResult();
+    }
 }
