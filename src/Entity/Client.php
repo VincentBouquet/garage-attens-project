@@ -21,6 +21,7 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $name;
 
@@ -83,6 +84,6 @@ class Client
     }
     public function __toString()
     {
-        return $this->name."-".$this->id;
+        return $this->name;
     }
 }

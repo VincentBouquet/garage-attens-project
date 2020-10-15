@@ -13,6 +13,8 @@
                 <th>SmallDescription</th>
                 <th>FullDescription</th>
                 <th>TimeLength</th>
+                <th>Employe</th>
+                <th>Client</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -24,6 +26,9 @@
                 <td>{{ intervention.smallDescription }}</td>
                 <td>{{ intervention.fullDescription }}</td>
                 <td>{{ intervention.timeLength }}</td>
+                <td>{{ intervention.employee }}</td>
+                <td>{{ intervention.client }}</td>
+
                 <td>
                     <a href="{{ path('intervention_show', {'id': intervention.id}) }}">show</a>
                     <a href="{{ path('intervention_edit', {'id': intervention.id}) }}">edit</a>
@@ -36,6 +41,18 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <ul>
+        {%  for futurinter in futurIntervention %}
+            <li>{{ futurinter.startdate|date('Y-m-d H:i:s') }}</li>
+        {% endfor %}
+    </ul>
+
+    <ul>
+        {%  for futurinter in pastIntervention %}
+            <li>{{ futurinter.startdate|date('Y-m-d H:i:s') }}</li>
+        {% endfor %}
+    </ul>
 
     <a href="{{ path('intervention_new') }}">Create new</a>
 {% endblock %}

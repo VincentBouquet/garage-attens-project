@@ -47,4 +47,36 @@ class InterventionRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @return Intervention[] de date futur a maintenant
+     */
+    public function getFuturIntervention(){
+        return $this->createQueryBuilder("interv")
+            ->where("interv.startdate > :currentTime")
+            ->setParameter("currentTime", new \DateTime())
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * @return Intervention[] de date futur a maintenant
+     */
+    public function getPastIntervention(){
+        return $this->createQueryBuilder("interv")
+            ->where("interv.startdate < :currentTime")
+            ->setParameter("currentTime", new \DateTime())
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+    /*public function getThisYearArticles(){
+        return $this->createQueryBuilder("a")
+            ->where("a.datepubli > '2020-10-10'")
+            ->getQuery()
+            ->getResult()
+            ;
+    }*/
+
 }
