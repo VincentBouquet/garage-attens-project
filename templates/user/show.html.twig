@@ -8,18 +8,6 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
                 <th>Firstname</th>
                 <td>{{ user.firstname }}</td>
             </tr>
@@ -37,6 +25,22 @@
             </tr>
         </tbody>
     </table>
+
+    <h2>intervention à venir</h2>
+    <ul>
+        {% for interv in futurIntervention %}
+            <li> {{ interv.smallDescription }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2> intervention passées</h2>
+
+    <ul>
+        {% for interv in pastIntervention %}
+            <li> {{ interv.smallDescription }}</li>
+        {% endfor %}
+    </ul>
+
 
     <a href="{{ path('user_index') }}">back to list</a>
 

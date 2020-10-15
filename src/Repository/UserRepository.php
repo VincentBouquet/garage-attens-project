@@ -64,4 +64,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
     */
+
+    /**
+     * montrer les interventions de chaque employees
+     */
+
+
+    public function getPastInterventionByUser() {
+
+    }
 }
