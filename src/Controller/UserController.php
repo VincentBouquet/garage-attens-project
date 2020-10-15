@@ -30,6 +30,7 @@ class UserController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        /*
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -46,6 +47,8 @@ class UserController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
         ]);
+        */
+        return $this->redirectToRoute('app_register');
     }
 
     /**

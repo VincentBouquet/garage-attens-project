@@ -8,9 +8,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Roles</th>
-                <th>Password</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Phone</th>
@@ -21,9 +18,6 @@
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
                 <td>{{ user.phone }}</td>
