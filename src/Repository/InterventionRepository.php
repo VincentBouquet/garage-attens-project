@@ -79,4 +79,25 @@ class InterventionRepository extends ServiceEntityRepository
             ;
     }*/
 
+    public function getFuturInterventionByUser($employee) {
+        return $this->createQueryBuilder("i")
+//            ->join("i.employee", "e" )
+            ->where("i.employee = :employee")
+            ->setParameter("employee",$employee)
+            ->andWhere("i.startdate > :currentTime")
+            ->setParameter("currentTime", new \DateTime())
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getPastInterventionByUser($employee) {
+        return $this->createQueryBuilder("i")
+//            ->join("i.employee", "e" )
+            ->where("i.employee = :employee")
+            ->setParameter("employee",$employee)
+            ->andWhere("i.startdate < :currentTime")
+            ->setParameter("currentTime", new \DateTime())
+            ->getQuery()
+            ->getResult();
+    }
 }
