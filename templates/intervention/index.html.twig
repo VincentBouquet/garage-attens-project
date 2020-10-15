@@ -4,30 +4,66 @@
 
 {% block body %}
     <h1>Intervention index</h1>
+    <h2>Intervention à venir:</h2>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Startdate</th>
                 <th>SmallDescription</th>
                 <th>FullDescription</th>
                 <th>TimeLength</th>
+                <th>Employe</th>
+                <th>Client</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for intervention in interventions %}
+        {% for intervention in futurIntervention %}
             <tr>
-                <td>{{ intervention.id }}</td>
-                <td>{{ intervention.startdate ? intervention.startdate|date('Y-m-d H:i:s') : '' }}</td>
+                 <td>{{ intervention.startdate ? intervention.startdate|date('d-m-Y H:i:s') : '' }}</td>
                 <td>{{ intervention.smallDescription }}</td>
                 <td>{{ intervention.fullDescription }}</td>
                 <td>{{ intervention.timeLength }}</td>
+                <td>{{ intervention.employee }}</td>
+                <td>{{ intervention.client }}</td>
+
                 <td>
                     <a href="{{ path('intervention_show', {'id': intervention.id}) }}">show</a>
                     <a href="{{ path('intervention_edit', {'id': intervention.id}) }}">edit</a>
                 </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="table">
+        <h2>Intervention passé:</h2>
+
+        <thead>
+        <tr>
+            <th>Startdate</th>
+            <th>SmallDescription</th>
+            <th>FullDescription</th>
+            <th>TimeLength</th>
+            <th>Employe</th>
+            <th>Client</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+        {% for intervention in pastIntervention %}
+            <tr>
+
+                <td>{{ intervention.startdate ? intervention.startdate|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{ intervention.smallDescription }}</td>
+                <td>{{ intervention.fullDescription }}</td>
+                <td>{{ intervention.timeLength }}</td>
+                <td>{{ intervention.employee }}</td>
+                <td>{{ intervention.client }}</td>
             </tr>
         {% else %}
             <tr>
