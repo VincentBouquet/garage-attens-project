@@ -4,11 +4,11 @@
 
 {% block body %}
     <h1>Intervention index</h1>
+    <h2>Intervention à venir:</h2>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Startdate</th>
                 <th>SmallDescription</th>
                 <th>FullDescription</th>
@@ -19,10 +19,9 @@
             </tr>
         </thead>
         <tbody>
-        {% for intervention in interventions %}
+        {% for intervention in futurIntervention %}
             <tr>
-                <td>{{ intervention.id }}</td>
-                <td>{{ intervention.startdate ? intervention.startdate|date('d-m-Y H:i:s') : '' }}</td>
+                 <td>{{ intervention.startdate ? intervention.startdate|date('d-m-Y H:i:s') : '' }}</td>
                 <td>{{ intervention.smallDescription }}</td>
                 <td>{{ intervention.fullDescription }}</td>
                 <td>{{ intervention.timeLength }}</td>
@@ -41,20 +40,38 @@
         {% endfor %}
         </tbody>
     </table>
+    <table class="table">
+        <h2>Intervention passé:</h2>
 
-    <ul>
-        <h1>Intervention à venir:</h1>
-        {%  for futurinter in futurIntervention %}
-            <li>{{ futurinter.startdate|date('d-m-Y H:i:s') }}</li>
-        {% endfor %}
-    </ul>
+        <thead>
+        <tr>
+            <th>Startdate</th>
+            <th>SmallDescription</th>
+            <th>FullDescription</th>
+            <th>TimeLength</th>
+            <th>Employe</th>
+            <th>Client</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+        {% for intervention in pastIntervention %}
+            <tr>
 
-    <ul>
-        <h1>Intervention passé:</h1>
-        {%  for futurinter in pastIntervention %}
-            <li>{{ futurinter.startdate|date('d-m-Y H:i:s') }}</li>
+                <td>{{ intervention.startdate ? intervention.startdate|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{ intervention.smallDescription }}</td>
+                <td>{{ intervention.fullDescription }}</td>
+                <td>{{ intervention.timeLength }}</td>
+                <td>{{ intervention.employee }}</td>
+                <td>{{ intervention.client }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
         {% endfor %}
-    </ul>
+        </tbody>
+    </table>
 
     <a href="{{ path('intervention_new') }}">Create new</a>
 {% endblock %}
