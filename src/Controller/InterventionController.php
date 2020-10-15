@@ -23,10 +23,9 @@ class InterventionController extends AbstractController
         $futurIntervention = $interventionRepository->getFuturIntervention();
         $pastIntervention = $interventionRepository->getPastIntervention();
 
-        dump($futurIntervention);
 
         return $this->render('intervention/index.html.twig', [
-            'interventions' => $interventionRepository->findAll(),
+            'interventions' => $interventionRepository->findBy(array(), array('startdate' => 'ASC')),
             'futurIntervention' => $futurIntervention,
             'pastIntervention' => $pastIntervention
         ]);
