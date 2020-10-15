@@ -1,20 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello InterventionController!{% endblock %}
+{% block title %}Intervention index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Intervention index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Startdate</th>
+                <th>SmallDescription</th>
+                <th>FullDescription</th>
+                <th>TimeLength</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for intervention in interventions %}
+            <tr>
+                <td>{{ intervention.id }}</td>
+                <td>{{ intervention.startdate ? intervention.startdate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ intervention.smallDescription }}</td>
+                <td>{{ intervention.fullDescription }}</td>
+                <td>{{ intervention.timeLength }}</td>
+                <td>
+                    <a href="{{ path('intervention_show', {'id': intervention.id}) }}">show</a>
+                    <a href="{{ path('intervention_edit', {'id': intervention.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Antoine/Desktop/garage-attens/garage-attens-project/src/Controller/InterventionController.php'|file_link(0) }}">src/Controller/InterventionController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Antoine/Desktop/garage-attens/garage-attens-project/templates/intervention/index.html.twig'|file_link(0) }}">templates/intervention/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <a href="{{ path('intervention_new') }}">Create new</a>
 {% endblock %}
