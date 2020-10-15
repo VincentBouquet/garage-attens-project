@@ -20,8 +20,14 @@ class InterventionController extends AbstractController
      */
     public function index(InterventionRepository $interventionRepository): Response
     {
+        $futurIntervention = $interventionRepository->getFuturIntervention();
+        $pastIntervention = $interventionRepository->getPastIntervention();
+
+
         return $this->render('intervention/index.html.twig', [
-            'interventions' => $interventionRepository->findAll(),
+            'interventions' => $interventionRepository->findBy(array(), array('startdate' => 'ASC')),
+            'futurIntervention' => $futurIntervention,
+            'pastIntervention' => $pastIntervention
         ]);
     }
 
@@ -51,10 +57,12 @@ class InterventionController extends AbstractController
     /**
      * @Route("/{id}", name="intervention_show", methods={"GET"})
      */
-    public function show(Intervention $intervention): Response
+    public function show(Intervention $intervention, InterventionRepository $interventionRepository): Response
     {
+
         return $this->render('intervention/show.html.twig', [
             'intervention' => $intervention,
+
         ]);
     }
 

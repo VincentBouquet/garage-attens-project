@@ -19,6 +19,8 @@ class Intervention
 
     /**
      * @ORM\Column(type="datetime")
+     * @ORM\OrderBy({"startdate" = "DESC"})
+
      */
     private $startdate;
 
@@ -123,6 +125,5 @@ class Intervention
 
         return $this;
     }
-
 
 }
