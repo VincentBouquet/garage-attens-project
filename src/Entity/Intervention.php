@@ -123,6 +123,4 @@ class Intervention
 
         return $this;
     }
-
-
 }
