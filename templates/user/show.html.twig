@@ -26,6 +26,13 @@
         </tbody>
     </table>
 
+    <h2>Temps travaillé</h2>
+    <ul>
+        {% for work in worked %}
+            <li> {{ work.timeLength }}</li>
+        {% endfor %}
+    </ul>
+
     <h2>intervention à venir</h2>
     <ul>
         {% for interv in futurIntervention %}
@@ -40,6 +47,8 @@
             <li> {{ interv.smallDescription }}</li>
         {% endfor %}
     </ul>
+
+
 
 
     <a href="{{ path('user_index') }}">back to list</a>

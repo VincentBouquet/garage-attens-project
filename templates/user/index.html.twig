@@ -13,6 +13,7 @@
                 <th>Phone</th>
                 <th>Address</th>
                 <th>actions</th>
+                <th>Temps travaillé</th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@
                     <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
                 </td>
+                <td> {{ workTimes[user.id].timeLength }}</td>
             </tr>
         {% else %}
             <tr>
@@ -34,6 +36,16 @@
         {% endfor %}
         </tbody>
     </table>
+    <ul>
+        {#{% for time in worked %}
+            {% if worked is null %}
+                <li> N'as pas travaillé</li>
+            {% else %}
+                <li> {{ time.timeLength }}</li>
+            {% endif %}
 
+
+        {% endfor %}#}
+    </ul>
     <a href="{{ path('user_new') }}">Create new</a>
 {% endblock %}

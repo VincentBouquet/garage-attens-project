@@ -21,10 +21,16 @@ class UserController extends AbstractController
      */
     public function index(UserRepository $userRepository, InterventionRepository $interventionRepository): Response
     {
-        $worked = $interventionRepository->getTimeWorked();
-        dump($worked);
+        $employees = $userRepository->findAll();
+        dump($employees);
+        $workTimes = [];
+        foreach ($employees as $employe) {
+            $workTimes[$employe->getId()] = $interventionRepository->getTimeWorked($employe);
+        }
+        dump($workTimes);
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $employees,
+            "workTimes" => $workTimes
         ]);
     }
 
@@ -62,12 +68,15 @@ class UserController extends AbstractController
 
         $futurIntervention = $interventionRepository->getFuturInterventionByUser($user);
         $pastIntervention = $interventionRepository->getPastInterventionByUser($user);
+        $worked = $interventionRepository->getTimeWorked($user);
+        dump($worked);
         dump($futurIntervention);
         dump($pastIntervention);
         return $this->render('user/show.html.twig', [
             'user' => $user,
             'pastIntervention' => $pastIntervention,
             'futurIntervention' => $futurIntervention,
+            'worked' => $worked,
         ]);
     }
 
