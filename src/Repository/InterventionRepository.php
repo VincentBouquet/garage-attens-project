@@ -105,6 +105,9 @@ class InterventionRepository extends ServiceEntityRepository
         return $this->createQueryBuilder("intervention")
             ->select("SUM(intervention.timeLength/60/151.67*100) as timeLength")
             ->where("intervention.employee = :employee")
+            ->andWhere("intervention.startdate BETWEEN :start AND :end")
+            ->setParameter("start", '2020-10-01')
+            ->setParameter("end", '2020-10-31')
             ->setParameter("employee", $employee)
             ->getQuery()
             ->getOneOrNullResult();

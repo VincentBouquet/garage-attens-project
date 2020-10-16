@@ -26,8 +26,8 @@
         </tbody>
     </table>
 
-    <h2>Temps travaillé</h2>
-    <p>{{ goodWorked.timeLength }} % /mois</p>
+    <h2>Temps travaillé (%/mois)</h2>
+    <p>{{ goodWorked.timeLength|number_format(2, '.', ',') }}%</p>
 
     <h2>intervention à venir</h2>
     <table>
@@ -72,9 +72,6 @@
         {% endfor %}
         </tbody>
     </table>
-
-
-
 
 
     <a href="{{ path('user_index') }}">back to list</a>
