@@ -27,11 +27,8 @@
     </table>
 
     <h2>Temps travaillé</h2>
-    <ul>
-        {% for work in worked %}
-            <li> {{ work.timeLength }}</li>
-        {% endfor %}
-    </ul>
+
+    <p> {{ worked.timeLength|number_format(2, '.', ',') }} %</p>
 
     <h2>intervention à venir</h2>
     <ul>
