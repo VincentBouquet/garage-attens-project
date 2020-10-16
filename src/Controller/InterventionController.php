@@ -20,6 +20,7 @@ class InterventionController extends AbstractController
      */
     public function index(InterventionRepository $interventionRepository): Response
     {
+        $this->denyAccessUnlessGranted("ROLE_ADMIN");
         $futurIntervention = $interventionRepository->getFuturIntervention();
         $pastIntervention = $interventionRepository->getPastIntervention();
 
@@ -36,6 +37,8 @@ class InterventionController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted("ROLE_ADMIN");
+        $this->denyAccessUnlessGranted("ROLE_ADMIN");
         $intervention = new Intervention();
         $form = $this->createForm(InterventionType::class, $intervention);
         $form->handleRequest($request);
@@ -59,7 +62,7 @@ class InterventionController extends AbstractController
      */
     public function show(Intervention $intervention, InterventionRepository $interventionRepository): Response
     {
-
+        $this->denyAccessUnlessGranted("ROLE_ADMIN");
         return $this->render('intervention/show.html.twig', [
             'intervention' => $intervention,
 
@@ -71,6 +74,8 @@ class InterventionController extends AbstractController
      */
     public function edit(Request $request, Intervention $intervention): Response
     {
+        $this->denyAccessUnlessGranted("ROLE_ADMIN");
+        $this->denyAccessUnlessGranted("ROLE_ADMIN");
         $form = $this->createForm(InterventionType::class, $intervention);
         $form->handleRequest($request);
 
@@ -91,6 +96,7 @@ class InterventionController extends AbstractController
      */
     public function delete(Request $request, Intervention $intervention): Response
     {
+        $this->denyAccessUnlessGranted("ROLE_ADMIN");
         if ($this->isCsrfTokenValid('delete'.$intervention->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($intervention);

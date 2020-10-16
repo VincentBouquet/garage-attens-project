@@ -27,26 +27,52 @@
     </table>
 
     <h2>Temps travaillé</h2>
-    <ul>
-        {% for work in worked %}
-            <li> {{ work.timeLength }}</li>
-        {% endfor %}
-    </ul>
+    <p>{{ goodWorked.timeLength }} % /mois</p>
 
     <h2>intervention à venir</h2>
-    <ul>
+    <table>
+        <thead>
+        <tr>
+            <th>Date de début</th>
+            <th>Description rapide</th>
+            <th>Description détaillé</th>
+            <th>Durée (min)</th>
+        </tr>
+        </thead>
+        <tbody>
         {% for interv in futurIntervention %}
-            <li> {{ interv.smallDescription }}</li>
+            <tr>
+                <td>{{ interv.startDate|date('d-m-Y H:i:s') }}</td>
+                <td>{{ interv.smallDescription }}</td>
+                <td>{{ interv.fullDescription }}</td>
+                <td>{{ interv.timeLength }}</td>
+            </tr>
         {% endfor %}
-    </ul>
+        </tbody>
+    </table>
 
-    <h2> intervention passées</h2>
-
-    <ul>
+    <h2>intervention passées</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Date de début</th>
+            <th>Description rapide</th>
+            <th>Description détaillé</th>
+            <th>Durée (min)</th>
+        </tr>
+        </thead>
+        <tbody>
         {% for interv in pastIntervention %}
-            <li> {{ interv.smallDescription }}</li>
+            <tr>
+                <td>{{ interv.startDate|date('d-m-Y H:i:s') }}</td>
+                <td>{{ interv.smallDescription }}</td>
+                <td>{{ interv.fullDescription }}</td>
+                <td>{{ interv.timeLength }}</td>
+            </tr>
         {% endfor %}
-    </ul>
+        </tbody>
+    </table>
+
 
 
 

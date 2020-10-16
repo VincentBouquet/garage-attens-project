@@ -39,6 +39,7 @@ class UserController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted("ROLE_ADMIN");
         /*
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -69,6 +70,11 @@ class UserController extends AbstractController
         $futurIntervention = $interventionRepository->getFuturInterventionByUser($user);
         $pastIntervention = $interventionRepository->getPastInterventionByUser($user);
         $worked = $interventionRepository->getTimeWorked($user);
+        if ($worked) {
+            $goodWorked = $worked;
+        } else {
+            $goodWorked = "zéro";
+        }
         dump($worked);
         dump($futurIntervention);
         dump($pastIntervention);
@@ -76,7 +82,7 @@ class UserController extends AbstractController
             'user' => $user,
             'pastIntervention' => $pastIntervention,
             'futurIntervention' => $futurIntervention,
-            'worked' => $worked,
+            'goodWorked' => $goodWorked,
         ]);
     }
 
@@ -85,6 +91,7 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user): Response
     {
+        $this->denyAccessUnlessGranted("ROLE_ADMIN");
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -105,6 +112,7 @@ class UserController extends AbstractController
      */
     public function delete(Request $request, User $user): Response
     {
+        $this->denyAccessUnlessGranted("ROLE_ADMIN");
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
